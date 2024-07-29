@@ -1,20 +1,14 @@
 Configuration WebServerConfig {
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
-
-    Node "YourVMName" {
+    Node 'dscvm' {
         WindowsFeature IIS {
-            Ensure = "Present"
-            Name = "dscvm"
+            Name = 'Web-Server'
+            Ensure = 'Present'
         }
 
         File WebsiteContent {
-            Ensure          = "Present"
-            Type            = "Directory"
-            DestinationPath = "C:\\inetpub\\wwwroot\\mywebsite"
-            SourcePath      = "\\\\fileserver\\content\\mywebsite"
+            DestinationPath = 'C:\inetpub\wwwroot\mywebsite'
+            SourcePath = 'C:\Source\Website'
+            Ensure = 'Present'
         }
     }
 }
-
-# Generate the MOF files for the configuration
-WebServerConfig -OutputPath "C:\\DSC\\WebServerConfig"
