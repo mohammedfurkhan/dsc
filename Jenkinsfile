@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout DSC configuration from Git repository
-                git 'https://github.com/mohammedfurkhan/dsc.git'
+                git branch: 'main', url: 'https://github.com/mohammedfurkhan/dsc.git'
             }
         }
 
