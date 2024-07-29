@@ -1,23 +1,29 @@
 pipeline {
     agent any
+
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/mohammedfurkhan/dsc.git', branch: 'main'
+                git 'https://github.com/mohammedfurkhan/dsc.git'
             }
         }
+        
         stage('Run DSC') {
             steps {
                 script {
-                    // Execute the DSC script to apply the configuration
                     powershell '''
-                    .\\ConfigureWebServer.ps1
-                    Start-DscConfiguration -Path C:\\DSC\\WebServerConfig -Wait -Verbose -Force
+                        # Define variables
+                        $configPath = "C:\\DSC\\WebServerConfig"
+                        $mofPath = "$configPath\\localhost.mof"
+
+                        # Import DSC configuration
+                        Start-DscConfiguration -Path $configPath -Wait -Verbose
                     '''
                 }
             }
         }
     }
+    
     post {
         always {
             cleanWs()
