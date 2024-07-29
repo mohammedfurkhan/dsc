@@ -13,7 +13,7 @@ pipeline {
             steps {
                 script {
                     // Define DSC configuration path
-                    def dscConfigPath = 'C:\DSC\WebServerConfig'
+                    def dscConfigPath = 'C:/DSC/WebServerConfig'
 
                     // Run DSC configuration using PowerShell
                     powershell """
